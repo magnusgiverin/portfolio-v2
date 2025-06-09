@@ -20,7 +20,7 @@ const SplitSection: React.FC = () => {
     }, []);
 
     return (
-        <section className="relative overflow-hidden w-full h-[120px] shadow-lg border-y border-neutral-200">
+        <section className="relative overflow-hidden w-full h-[120px] shadow-lg border-y border-neutral-200 bg-white">
             <svg
                 ref={svgRef}
                 className="w-full h-[40px] block"
