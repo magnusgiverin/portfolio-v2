@@ -1,9 +1,9 @@
 import { EmailTemplate } from '@/src/components/email-template';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND);
-
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.NEXT_PUBLIC_RESEND);
+
   if (request.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405 });
   }
