@@ -116,59 +116,28 @@ const HeroSection = () => {
 
     useEffect(() => {
         const parallaxFactors = [0.05, 0.08, 0.11, 0.14, 0.17, 0.20, 0.23, 0.26, 0.7]; // 9 (bg) to 1 (fg)
-        const section = document.querySelector('section');
-        let animationFrameId: number;
-        let lastScrollY = window.scrollY;
-
-        const isInView = () => {
-            if (!section) return false;
-            const rect = section.getBoundingClientRect();
-            return rect.bottom > 0 && rect.top < window.innerHeight;
-        };
-
-        const animateParallax = () => {
-            if (!isInView()) {
-                animationFrameId = requestAnimationFrame(animateParallax);
-                return;
-            }
+        const handleScroll = () => {
             const scrolled = window.scrollY;
-            if (scrolled !== lastScrollY) {
-                parallaxRefs.current.forEach((img, i) => {
-                    if (img) {
-                        const scale = 1 + scrolled * parallaxFactors[i] * 0.001;
+            parallaxRefs.current.forEach((img, i) => {
+                if (img) {
+                    const scale = 1 + scrolled * parallaxFactors[i] * 0.01;
 
-                        const centerX = window.innerWidth / 2;
-                        const centerY = window.innerHeight / 2;
+                    const centerX = window.innerWidth / 2;
+                    const centerY = window.innerHeight / 2;
 
-                        const rect = img.getBoundingClientRect();
-                        const imgCenterX = rect.left + rect.width / 2;
-                        const imgCenterY = rect.top + rect.height / 2;
+                    const rect = img.getBoundingClientRect();
+                    const imgCenterX = rect.left + rect.width / 2;
+                    const imgCenterY = rect.top + rect.height / 2;
 
-                        const dx = (centerX - imgCenterX) * parallaxFactors[i] * 0.03;
-                        const dy = (centerY - imgCenterY) * parallaxFactors[i] * 0.03;
-                        img.style.transform = `scale(${scale}) translate(${dx}px, ${dy}px)`;
-                    }
-                });
-                lastScrollY = scrolled;
-            }
-            animationFrameId = requestAnimationFrame(animateParallax);
+                    const dx = (centerX - imgCenterX) * parallaxFactors[i] * 0.03;
+                    const dy = (centerY - imgCenterY) * parallaxFactors[i] * 0.03;
+                    img.style.transform = `scale(${scale}) translate(${dx}px, ${dy}px)`;
+                }
+            });
         };
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
-        // Listen to scroll and resize for more frequent updates
-        const handleScrollOrResize = () => {
-            animateParallax();
-        };
-
-        window.addEventListener('scroll', handleScrollOrResize, { passive: true });
-        window.addEventListener('resize', handleScrollOrResize);
-
-        animationFrameId = requestAnimationFrame(animateParallax);
-
-        return () => {
-            cancelAnimationFrame(animationFrameId);
-            window.removeEventListener('scroll', handleScrollOrResize);
-            window.removeEventListener('resize', handleScrollOrResize);
-        };
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     useEffect(() => {
@@ -246,7 +215,8 @@ const HeroSection = () => {
                                 transform: `translateY(${10 + i * 10}px) scale(1.05)`,
                                 transition: `opacity 0.8s ${(9 - i) * 0.08 + 0.2}s, transform 0.9s cubic-bezier(0,.47,.59,1) ${(9 - i) * 0.08 + 0.2}s`,
                             }}
-                            onLoadingComplete={img => {
+                            onLoad={event => {
+                                const img = event.currentTarget;
                                 img.style.opacity = "1";
                                 img.style.transform = "translateY(0px) scale(1)";
                             }}
