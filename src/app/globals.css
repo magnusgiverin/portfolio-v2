@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.5s;
+}
+
+.page-transition {
+  opacity: 0;
+  background: white;
+  transform: translatex(-30px);
+  filter: blur(16px) brightness(1.1) saturate(1.2);
+  transition:
+    opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+    transform 0.8s cubic-bezier(0.4,0,0.2,1),
+    filter 0.7s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+  will-change: opacity, transform, filter, background;
+}
+
+.quick-transition {
+ opacity: 0;
+  background: white;
+  transform: translateX(-60px);
+  filter: blur(16px) brightness(1.1) saturate(1.2);
+  transition:
+    opacity 0.2s cubic-bezier(0.4,0,0.2,1),
+    transform 0.4s cubic-bezier(0.4,0,0.2,1),
+    filter 0.3s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+  will-change: opacity, transform, filter, background;
+}
