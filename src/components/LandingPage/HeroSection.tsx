@@ -117,7 +117,8 @@ const HeroSection = () => {
     useEffect(() => {
         const parallaxFactors = [0.05, 0.08, 0.11, 0.14, 0.17, 0.20, 0.23, 0.26, 0.7]; // 9 (bg) to 1 (fg)
         const section = document.querySelector('section');
-        let ticking = false;
+        let animationFrameId: number;
+        let lastScrollY = window.scrollY;
 
         const isInView = () => {
             if (!section) return false;
@@ -125,12 +126,13 @@ const HeroSection = () => {
             return rect.bottom > 0 && rect.top < window.innerHeight;
         };
 
-        const handleScroll = () => {
-            if (!isInView()) return;
-            if (ticking) return;
-            ticking = true;
-            window.requestAnimationFrame(() => {
-                const scrolled = window.scrollY;
+        const animateParallax = () => {
+            if (!isInView()) {
+                animationFrameId = requestAnimationFrame(animateParallax);
+                return;
+            }
+            const scrolled = window.scrollY;
+            if (scrolled !== lastScrollY) {
                 parallaxRefs.current.forEach((img, i) => {
                     if (img) {
                         const scale = 1 + scrolled * parallaxFactors[i] * 0.001;
@@ -147,13 +149,26 @@ const HeroSection = () => {
                         img.style.transform = `scale(${scale}) translate(${dx}px, ${dy}px)`;
                     }
                 });
-                ticking = false;
-            });
+                lastScrollY = scrolled;
+            }
+            animationFrameId = requestAnimationFrame(animateParallax);
         };
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
+        // Listen to scroll and resize for more frequent updates
+        const handleScrollOrResize = () => {
+            animateParallax();
+        };
 
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+        window.addEventListener('resize', handleScrollOrResize);
+
+        animationFrameId = requestAnimationFrame(animateParallax);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('scroll', handleScrollOrResize);
+            window.removeEventListener('resize', handleScrollOrResize);
+        };
     }, []);
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 export const projectsSection = {
     heading: "Projects",
-    subheading: "02",
+    subheading: "03",
     ctaLink: {
         text: "See all details",
         href: "/projects#",

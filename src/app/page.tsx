@@ -12,12 +12,12 @@ export default function Home() {
     <div className="min-h-screen text-black flex flex-col items-stretch px-0 py-0 font-sans relative overflow-x-hidden ">
         <HeroSection />
         <AboutSection />
+        <FiguresSection />
         <ProjectsTeaserSection />
         <SkillsSection />
-        <FiguresSection />
         <CareerSection />
-        <SplitSection />
         <ContactSection />
+        <SplitSection />
     </div>
   );
 }

@@ -68,7 +68,7 @@ export const aboutSection = {
 
 export const figuresSection = {
     heading: "Figures",
-    subheading: "04",
+    subheading: "02",
     figures: [
         {
             number: 22,
@@ -99,7 +99,7 @@ export const figuresSection = {
 
 export const skillsSection = {
     heading: "Skills",
-    subheading: "03",
+    subheading: "04",
     description: "Technologies and tools I work with:",
     skills: [
         {
@@ -155,7 +155,8 @@ export const skillsSection = {
 };
 
 export const contactSection = {
-    heading: "Get In Touch",
+    heading: "Contact",
+    subheading: "06",
     description: "Interested in working together or have any questions? Reach out!",
     emailCta: "Send me an email",
 };
