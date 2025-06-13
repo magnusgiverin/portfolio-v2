@@ -4,7 +4,7 @@
  */
 
 export const heroSection = {
-    subtitle: "Frontend developer crafting sharp, modern web experiences with code, creativity, and a love for detail.",
+    sublabel: "Frontend developer crafting sharp, modern web experiences with code, creativity, and a love for detail.",
 };
 
 export const aboutSection = {
@@ -160,3 +160,44 @@ export const contactSection = {
     description: "Interested in working together or have any questions? Reach out!",
     emailCta: "Send me an email",
 };
+
+export const roadmapSection = {
+    heading: "Navigation",
+    subheading: "00",
+    roadmap: [
+        {
+            label: "Home",
+            href: "/",
+            sublinks: [],
+            description: "General overview"
+        },
+        {
+            label: "About",
+            href: "/about#",
+            sublinks: [
+                { label: "Timeline", href: "/about#timeline" },
+                { label: "Education", href: "/about#education" },
+            ],
+            description: "Learn more about me"
+        },
+        {
+            label: "Career",
+            href: "/career#",
+            sublinks: [
+                { label: "Current Position", href: "/career#current-positions" },
+                { label: "Past Experiences", href: "/career#past-experiences" },
+            ],
+            description: "Explore my career"
+        },
+        {
+            label: "Projects",
+            href: "/projects#",
+            sublinks: [
+                { label: "Academic Projects", href: "/projects#academic" },
+                { label: "Personal Projects", href: "/projects#personal" },
+                { label: "Freelance Work", href: "/projects#freelance" },
+            ],
+            description: "View my projects"
+        },
+    ]
+}

@@ -2,7 +2,7 @@
 import { heroSection } from "@/src/resources/text/landingPageText";
 import { useQuickTransition } from "@/src/utils/QuickTransitionLink";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const buttons = [
     {
@@ -112,34 +112,6 @@ const buttons = [
 ]
 
 const HeroSection = () => {
-    const parallaxRefs = useRef<Array<HTMLImageElement | null>>([]);
-
-    useEffect(() => {
-        const parallaxFactors = [0.05, 0.08, 0.11, 0.14, 0.17, 0.20, 0.23, 0.26, 0.7]; // 9 (bg) to 1 (fg)
-        const handleScroll = () => {
-            const scrolled = window.scrollY;
-            parallaxRefs.current.forEach((img, i) => {
-                if (img) {
-                    const scale = 1 + scrolled * parallaxFactors[i] * 0.01;
-
-                    const centerX = window.innerWidth / 2;
-                    const centerY = window.innerHeight / 2;
-
-                    const rect = img.getBoundingClientRect();
-                    const imgCenterX = rect.left + rect.width / 2;
-                    const imgCenterY = rect.top + rect.height / 2;
-
-                    const dx = (centerX - imgCenterX) * parallaxFactors[i] * 0.03;
-                    const dy = (centerY - imgCenterY) * parallaxFactors[i] * 0.03;
-                    img.style.transform = `scale(${scale}) translate(${dx}px, ${dy}px)`;
-                }
-            });
-        };
-        window.addEventListener("scroll", handleScroll, { passive: true });
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     useEffect(() => {
         const timeoutText = setTimeout(() => {
             const el = document.getElementById('hero-text');
@@ -195,25 +167,33 @@ const HeroSection = () => {
                 className="absolute inset-0 w-full h-full pointer-events-none z-0"
                 aria-hidden="true"
             >
-                <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                <div className="overflow-hidden flex" style={{ position: "relative", width: "100%", height: "100%" }}>
                     {[...Array(9)].map((_, i) => (
                         <Image
                             key={i}
-                            ref={el => { parallaxRefs.current[i] = el; }}
                             src={`/landscape/Layer${9 - i}.svg`}
                             alt=""
-                            fill
                             className="object-cover"
                             priority
+                            width={1920}
+                            height={1080}
                             style={{
                                 willChange: "transform, opacity",
                                 zIndex: i + 1,
                                 position: "absolute",
                                 top: 0,
                                 left: 0,
+                                width: "100vw",
+                                height: "100vh",
+                                maxWidth: "100vw",
+                                maxHeight: "100vh",
+                                minWidth: "100vw",
+                                minHeight: "100vh",
+                                objectFit: "cover",
                                 opacity: 0,
-                                transform: `translateY(${10 + i * 10}px) scale(1.05)`,
                                 transition: `opacity 0.8s ${(9 - i) * 0.08 + 0.2}s, transform 0.9s cubic-bezier(0,.47,.59,1) ${(9 - i) * 0.08 + 0.2}s`,
+                                overflow: "hidden",
+                                pointerEvents: "none",
                             }}
                             onLoad={event => {
                                 const img = event.currentTarget;
@@ -225,7 +205,9 @@ const HeroSection = () => {
                 </div>
             </div>
             <div
-                className="relative md:absolute md:ml-20 md:right-60 lg:right-50 md:top-40 z-10 flex flex-col">
+                className="relative md:absolute md:ml-20 md:right-60 lg:right-50 md:top-40 z-10 flex flex-col"
+                >
+
                 <h1
                     className="text-3xl md:text-7xl font-extrabold tracking-tight leading-tight uppercase text-black mb-6 whitespace-pre-line"
                     style={{
@@ -256,7 +238,7 @@ const HeroSection = () => {
                         transition: "opacity 0.8s 0.9s, transform 0.9s cubic-bezier(0,.47,.59,1) 0.9s",
                     }}
                     id="hero-info">
-                    {heroSection.subtitle}
+                    {heroSection.sublabel}
                 </p>
             </div>
             <div className="w-full items-left relative md:absolute md:left-20 md:bottom-20 z-10 flex flex-row gap-2">

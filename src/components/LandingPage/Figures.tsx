@@ -46,10 +46,10 @@ const FiguresSection = () => {
                                 <td className="w-[100px] md:w-[400px] 3xl:w-[600px] md:pl-8 py-3 px-4 text-5xl md:text-7xl text-black relative z-10">
                                     {fig.number}
                                 </td>
-                                <td className="py-3 px-4 text-neutral-700 relative z-10">
+                                <td className="py-3 px-4 text-neutral-700 relative z-10 w-[1000px]">
                                     {fig.description}
                                 </td>
-                                <td className="hidden md:table-cell text-6xl py-3 px-4 pr-8 relative z-10 items-center flex justify-end">
+                                <td className="hidden md:flex py-3 px-4 h-full relative z-10 text-6xl items-center justify-end md:pr-8">
                                     &bull;
                                 </td>
                             </tr>

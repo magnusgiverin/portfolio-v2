@@ -33,8 +33,7 @@ const ProjectsTeaserSection = () => {
                 </div>
             </span>
             <div className="overflow-x-auto flex flex-row border-t border-neutral-200">
-                <div className="hidden md:flex md:w-1/5 lg:w-1/4 2xl:w-1/3 h-auto border-r border-neutral-200 pr-8 items-center justify-center">
-                </div>
+                <div className="hidden md:flex md:w-1/5 lg:w-1/4 2xl:w-1/3 h-auto border-r border-neutral-200 items-center justify-center"/>
                 <table className="w-full md:w-4/5 lg:w-3/4 2xl:w-2/3">
                     <thead>
                         <tr className="border-b border-neutral-200">
@@ -67,7 +66,7 @@ const ProjectsTeaserSection = () => {
                                 <td className="w-[400px] 3xl:w-[600px] md:pl-8 py-3 px-4 font-semibold text-black relative z-10 group-hover:text-white transition-colors duration-300">
                                     {proj.name}
                                 </td>
-                                <td className="hidden md:table-cell py-3 px-4 text-neutral-700 relative z-10 group-hover:text-white transition-colors duration-300">
+                                <td className="hidden md:table-cell w-[1000px] py-3 px-4 text-neutral-700 relative z-10 group-hover:text-white transition-colors duration-300">
                                     {proj.description}
                                 </td>
                                 <td className="py-3 px-4 relative z-10 group-hover:text-white transition-colors duration-300 items-center flex justify-end md:pr-8">

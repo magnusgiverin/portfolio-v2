@@ -1,5 +1,6 @@
 'use client';
 import { contactSection } from "@/src/resources/text/landingPageText";
+import { useQuickTransition } from "@/src/utils/QuickTransitionLink";
 import { useState } from "react";
 
 const ContactSection = () => {
@@ -43,6 +44,7 @@ const ContactSection = () => {
     sendEmail();
   };
 
+  const quickTransition = useQuickTransition();
 
   return (
     <section
@@ -67,8 +69,8 @@ const ContactSection = () => {
             onSubmit={handleSubmit}
             className="w-full bg-white px-2 md:px-8 p-8 flex flex-col gap-4"
           >
-            <span className="flex flex-row">
-              <label className="max-w-sm w-1/2 font-mono text-xs text-neutral-700 uppercase tracking-widest">
+            <span className="flex flex-row max-w-3xl w-full">
+              <label className="w-1/2 font-mono text-xs text-neutral-700 uppercase tracking-widest">
                 Name
                 <input
                   type="text"
@@ -79,7 +81,7 @@ const ContactSection = () => {
                   className="mt-1 block w-full border border-black border-r-0 px-3 py-2 text-sm focus:outline-none focus:border-orange-600"
                 />
               </label>
-              <label className="max-w-sm w-1/2 font-mono text-xs text-neutral-700 uppercase tracking-widest">
+              <label className="w-1/2 font-mono text-xs text-neutral-700 uppercase tracking-widest">
                 Email
                 <input
                   type="email"
@@ -103,6 +105,19 @@ const ContactSection = () => {
               />
             </label>
             <span className="flex flex-row gap-2 mt-4 ">
+              <button
+                type="button"
+                  onClick={(e) => quickTransition.handleTransition(e, "#top")}
+                className="cursor-pointer relative inline-block w-12 h-12 border border-black hover:border-orange-600 bg-white text-black uppercase text-xs font-bold tracking-widest rounded-none overflow-hidden group"
+              >
+                <span
+                  className="absolute inset-0 left-0 top-0 w-full h-full bg-orange-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0"
+                  aria-hidden="true"
+                />
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300 items-center flex justify-center gap-2 material-symbols-outlined">
+                  arrow_upward
+                </span>
+              </button>
               <button
                 type="submit"
                 className="w-min cursor-pointer relative inline-block px-8 py-2 border border-black hover:border-orange-600 bg-white text-black uppercase text-xs font-bold tracking-widest rounded-none overflow-hidden group"

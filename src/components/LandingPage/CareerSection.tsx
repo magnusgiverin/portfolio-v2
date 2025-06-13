@@ -44,7 +44,7 @@ const CareerSection = () => {
                                     key={i}
                                     className={`h-[150px] relative p-2 bg-white flex flex-col justify-between hover:bg-black transition-colors duration-300 ease-in-out cursor-pointer group ${borderClasses}`}
                                 >
-                                    <span className="absolute top-1 right-2 text-xs text-gray-400 font-mono">
+                                    <span className="absolute top-3 right-2 text-xs text-gray-400 font-mono">
                                         {i < 9 ? `0${i + 1}` : i + 1}
                                     </span>
                                     <div className="mb-2 font-bold text-sm group-hover:text-white">{pos.title}</div>

@@ -80,7 +80,19 @@ const AboutSection = () => {
                     <ul
                         className="flex w-full xl:w-1/2 justify-between overflow-x-auto md:overflow-visible whitespace-nowrap scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent"
                         ref={linksRef}
+                        style={{
+                            scrollbarWidth: "none", // Firefox
+                            msOverflowStyle: "none", // IE and Edge
+                        }}
                     >
+                        {/* Hide scrollbar for Webkit browsers */}
+                        <style>
+                            {`
+                                ul::-webkit-scrollbar {
+                                    display: none;
+                                }
+                            `}
+                        </style>
                         {aboutSection.links.map((link: { label: string; href: string; icon: string; }, i) => (
                             <li key={link.href} className="flex-shrink-0">
                                 <a
